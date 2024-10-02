@@ -1,0 +1,18 @@
+const url = 'https://raw.githubusercontent.com/guilhermeonrails/api/main/dados-globais.json'
+
+async function visualizarInformacoesGlobais() {
+    const res = await fetch(url)
+    const dados = await res.json()
+    const pessoasConectadas = (dados.total_pessoas_conectadas/1e9)
+    const pessoasMundo = (dados.total_pessoas_mundo/1e9)
+    const horas = parseInt(dados.tempo_medio)
+    const minutos = Math.round((dados.tempo_medio - horas) *100)
+    const porcentagemConectada = ((pessoasConectadas/pessoasMundo)*100).toFixed(2)
+    const paragrafo = document.createElement('p')
+    paragrafo.classList.add('graficos-container__texto')
+    paragrafo.innerHTML = ` Graças a grande biodiversidade no Brasil podemos aproveitar de uma grande variedade de frutas, mas qual delas seria as favoritas dos brasileiros?`
+    const container = document.getElementById('graficos-container')
+    container.appendChild(paragrafo)
+}
+visualizarInformacoesGlobais()
+
